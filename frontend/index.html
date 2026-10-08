@@ -4,9 +4,104 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    <meta name="theme-color" content="#2563eb" />
+    <meta name="description" content="Buy and sell with confidence on TRIGGER." />
+    <title>TRIGGER | Buy &amp; Sell with Confidence</title>
+    <style>
+      #startup-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        background: radial-gradient(ellipse at 50% 38%, #eff6ff 0%, #f8faff 40%, #ffffff 78%);
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 380ms ease, visibility 0s linear 380ms;
+      }
+
+      #startup-screen.startup-screen--leaving {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      .startup-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: clamp(1.25rem, 5vw, 2rem);
+        padding: 1.5rem;
+        animation: startup-arrive 550ms cubic-bezier(.2, .8, .2, 1) both;
+      }
+
+      .startup-logo {
+        display: grid;
+        place-items: center;
+        width: clamp(6rem, 24vw, 9rem);
+        aspect-ratio: 1;
+        border-radius: clamp(1.5rem, 6vw, 2.5rem);
+        color: #fff;
+        background: linear-gradient(140deg, #2563eb 0%, #4f46e5 100%);
+        box-shadow: 0 22px 60px rgb(37 99 235 / 25%), inset 0 1px 0 rgb(255 255 255 / 30%);
+        font: 800 clamp(4rem, 16vw, 6rem)/1 system-ui, sans-serif;
+        letter-spacing: -.08em;
+        padding-right: .08em;
+      }
+
+      .startup-wordmark {
+        color: #111827;
+        font: 900 clamp(2.5rem, 11vw, 5.5rem)/1 system-ui, sans-serif;
+        letter-spacing: .14em;
+        padding-left: .14em;
+      }
+
+      .startup-rule {
+        position: relative;
+        width: clamp(4rem, 18vw, 7rem);
+        height: 4px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #dbeafe;
+      }
+
+      .startup-rule::after {
+        position: absolute;
+        inset-block: 0;
+        left: -45%;
+        display: block;
+        width: 42%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #2563eb, #6366f1);
+        content: "";
+        animation: startup-progress 1.8s ease-in-out infinite alternate;
+      }
+
+      @keyframes startup-arrive {
+        from { opacity: 0; transform: translateY(14px) scale(.97); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      @keyframes startup-progress {
+        from { left: -45%; }
+        to { left: 103%; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        #startup-screen { transition-duration: 1ms; }
+        .startup-brand { animation: none; }
+      }
+    </style>
   </head>
   <body>
+    <div id="startup-screen" role="status" aria-label="Loading TRIGGER">
+      <div class="startup-brand">
+        <div class="startup-logo" aria-hidden="true">T</div>
+        <div class="startup-wordmark">TRIGGER</div>
+        <div class="startup-rule" aria-hidden="true"></div>
+      </div>
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
